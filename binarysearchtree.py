@@ -15,7 +15,7 @@ class Tree:
         if self.root is None:
             self.root = Node(id, value, None)
         else:
-            insert(self.root,id, value)
+            return insert(self.root,id, value)
 
     def find(self, id):
         return find(self.root, id)
@@ -29,12 +29,18 @@ def insert (node, id, value):
         if node.child2 is None:
             node.child2 = Node(id, value, node)
         else:
-            insert(node.child2, id, value)
+            return insert(node.child2, id, value)
+
     elif id < node.id:
         if node.child1 is None:
             node.child1 = Node(id,value, node)
         else:
-            insert(node.child1, id, value)
+            return insert(node.child1, id, value)
+    else:
+        old_value = node.value
+        node.value = value
+        return old_value
+
 
 
 def traverse (node, mickey_mouse):
@@ -73,11 +79,13 @@ def main():
     my_tree.insert(31,"awhoo")
     my_tree.insert(22,"meep")
     my_tree.insert(-5,"lol")
+    print(my_tree.insert(-5,"lo"))
     my_tree.insert(-12,"me")
     my_tree.insert(42,"je")
     my_tree.insert(-17,"no")
     my_tree.insert(23,"not")
     my_tree.traverse(print)
+
     print(my_tree.find(21))
 
 
